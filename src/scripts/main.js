@@ -14,7 +14,7 @@ startButton.addEventListener('click', () => {
     game.start();
   } else if (game.getStatus() === 'playing') {
     const confirmRestart = confirm(
-      'Você já tem uma partida em andamento. Deseja realmente reiniciar?',
+      'You already have a match in progress. Do you really want to restart?',
     );
 
     if (confirmRestart) {
@@ -91,18 +91,29 @@ function renderBoard() {
     const previousValue = cell.textContent;
 
     cell.textContent = value > 0 ? value : '';
-    cell.className = 'field-cell';
+    
+    cell.classList.forEach((className) => {
+      if (className.startsWith('field-cell--')) {
+        cell.classList.remove(className);
+      }
+    });
 
     if (value > 0) {
       cell.classList.add(`field-cell--${value}`);
 
       if (!previousValue && value > 0) {
         cell.classList.add('tile-new');
+      } else {
+        cell.classList.remove('tile-new');
       }
 
-      if (previousValue && previousValue !== value) {
+      if (previousValue && String(previousValue) !== String(value)) {
         cell.classList.add('tile-merged');
+      } else {
+        cell.classList.remove('tile-merged');
       }
+    } else {
+      cell.classList.remove('tile-new', 'tile-merged');
     }
   });
 }

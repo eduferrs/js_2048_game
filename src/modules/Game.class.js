@@ -130,6 +130,7 @@ class Game {
   start() {
     this.status = 'playing';
     this.addRandomTile();
+    this.addRandomTile();
   }
 
   restart() {
