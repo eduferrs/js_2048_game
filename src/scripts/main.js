@@ -91,7 +91,7 @@ function renderBoard() {
     const previousValue = cell.textContent;
 
     cell.textContent = value > 0 ? value : '';
-    
+
     cell.classList.forEach((className) => {
       if (className.startsWith('field-cell--')) {
         cell.classList.remove(className);
